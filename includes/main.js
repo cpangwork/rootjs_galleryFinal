@@ -1,5 +1,6 @@
 /* your javascript goes here */
 
+
 $(document).ready(initiateApp);
 
 var pictures = [
@@ -27,15 +28,17 @@ function initiateApp(){
 	addModalCloseHandler();
 }
 function makeGallery(imageArray){
-	//use loops and jquery dom creation to make the html structure inside the #gallery section
 
-	//create a loop to go through the pictures
-		//create the elements needed for each picture, store the elements in variable
-
-		//attach a click handler to the figure you create.  call the "displayImage" function.  
-
-		//append the element to the #gallery section
-
+	
+	for (var i = 0; i < imageArray.length; i++){			//use loops and jquery dom creation to make the html structure inside the #gallery section
+		var linkForBackgourndImage = imageArray[i];
+		var figureClass = $('<figure>').addClass('imageGallery col-xs-12 col-sm-6 col-md-4').css("background-image", "url(" + linkForBackgourndImage + ")");
+		var figCaption = $('<figcaption>').text(imageArray[i]);										//create a loop to go through the pictures	//create the elements needed for each picture, store the elements in variable
+		figureClass.click(displayImage);	//attach a click handler to the figure you create.  call the "displayImage" function.  
+		figureClass.append(figCaption);
+		$('#gallery').append(figureClass);	//append the element to the #gallery section
+		return imageArray[i];
+	}
 }
 
 function addModalCloseHandler(){
@@ -56,8 +59,12 @@ function displayImage(){
 
 	//show the modal with JS.  Check for more info here: 
 	//https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp
+	debugger;
+	var figureClass = $(this);
+	var imageUrl = figureClass.css('background-image').slice(7, 16);
+	$(".modal-content").modal(this.imageUrl);
+	
 }
-
 
 
 
